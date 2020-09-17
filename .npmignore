@@ -1,0 +1,6 @@
+.gitattributes
+.github
+src
+tsconfig.json
+.idea
+images
