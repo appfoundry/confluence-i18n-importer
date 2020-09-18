@@ -1,9 +1,10 @@
 # confluence-i18n-importer
 
 ### Information
-
 CLI tool to parse a Confluence page with a table containing translations to JSON files that can be used with 
 [i18next](https://www.i18next.com/).
+
+A blog article explaining how and why we use this tool at AppFoundry can be found on [our blog](https://appfoundry.be/blog/automating-the-copy-experience-for-our-customers).
 
 Confluence table structure example:
 
