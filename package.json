@@ -1,6 +1,6 @@
 {
 	"name": "confluence-i18n-importer",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Import translations from Confluence",
 	"main": "lib/index.js",
 	"bin": "bin/confluence-i18n-importer",
