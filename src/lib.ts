@@ -18,7 +18,7 @@ const translationToTuple = (translation: Translation, translationKey: string) =>
 ]
 
 const buildTranslationDictionary = (json: Translation[]) => {
-	const trannslationsDictionary = new Map()
+	const translationsDictionary = new Map()
 
 	for (const translation of json) {
 		// Get the language keys
@@ -26,18 +26,18 @@ const buildTranslationDictionary = (json: Translation[]) => {
 
 		for (const translationKey of translationsKeys) {
 			// Add translation tuple of [technicalId, translationValue] to dictionary
-			if (trannslationsDictionary.has(translationKey)) {
-				trannslationsDictionary.set(translationKey, [
-					...trannslationsDictionary.get(translationKey),
+			if (translationsDictionary.has(translationKey)) {
+				translationsDictionary.set(translationKey, [
+					...translationsDictionary.get(translationKey),
 					translationToTuple(translation, translationKey),
 				])
 			} else {
-				trannslationsDictionary.set(translationKey, [translationToTuple(translation, translationKey)])
+				translationsDictionary.set(translationKey, [translationToTuple(translation, translationKey)])
 			}
 		}
 	}
 
-	return trannslationsDictionary
+	return translationsDictionary
 }
 
 const translationsToJSFile = (translations: [string, string]) => {
@@ -48,9 +48,9 @@ const translationsToJSFile = (translations: [string, string]) => {
 }
 
 const writeI18nFiles = (json: Translation[], useTypeScript: boolean, outputDirectory: string) => {
-	const trannslationsDictionary = buildTranslationDictionary(json)
+	const translationsDictionary = buildTranslationDictionary(json)
 
-	for (const languageEntry of trannslationsDictionary) {
+	for (const languageEntry of translationsDictionary) {
 		const [translationLanguage, translations] = languageEntry
 		const extension = getFileExtension(useTypeScript)
 

@@ -44,5 +44,5 @@ export const cli = (args: string[]) => {
 		options.outputDir
 	)
 		.then(() => console.log('Successfully written i18n files'))
-		.catch((err) => console.error('Error while parsing i18 from Confluence', err))
+		.catch((err) => console.error('Error while parsing i18n from Confluence', err))
 }
