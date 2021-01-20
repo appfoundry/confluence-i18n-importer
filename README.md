@@ -20,12 +20,17 @@ The i18n files are outputted by default in the directory where the command is ra
 
 ### Options
 
-- '-d': Domain of the Confluence page. Example 'https://confluence.yourcompany.com'
-- '-i': Page id of the confluence page to be parsed. If you want the page ID, go to Tools —> Page Information on the particular page you are interested in. You should see the page (content) ID shown in the URL when you do this.
-- '-u': The username of the confluence account.
-- '-p': Password or API token of the confluence account. API tokens are only avaiable on cloud hosted Atlassasian stacks.
-- '-t': When this flag is given the output files will have the TypeScript (.ts) extension.
-- '-o': Output directory for i18n files. Remeber to quote the path if there's spaces in the path. The directory already has to exist. Default the directory when the command is ran from.
+
+| Flag       | Description          |
+| :-------------: |------------- |
+| -d      | Domain of the Confluence page. Example 'https://confluence.yourcompany.com' |
+| -i      | Page id of the confluence page to be parsed. If you want the page ID, go to Tools —> Page Information on the particular page you are interested in. You should see the page (content) ID shown in the URL when you do this.      |
+| -u | The username of the confluence account. |
+| -p | Password or API token of the confluence account. API tokens are only avaiable on cloud hosted Atlassasian stacks. |
+| -t | When this flag is given the output files will have the TypeScript (.ts) extension. |
+| -o | Output directory for i18n files. Remeber to quote the path if there's spaces in the path. The directory already has to exist. Default the directory when the command is ran from. |
+| --noEmpty | Ignore translations with an empty value |
+
 
 ### Using locally
 

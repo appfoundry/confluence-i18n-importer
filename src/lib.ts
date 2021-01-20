@@ -40,14 +40,21 @@ const buildTranslationDictionary = (json: Translation[]) => {
 	return translationsDictionary
 }
 
-const translationsToJSFile = (translations: [string, string]) => {
+const translationsToJSFile = (translations: [string, string], noEmptyValues: boolean) => {
 	return prettier.format(
-		`export default {${translations.map(([key, value]) => `${key}: ${`\`${value}\``}`)}}`,
+		`export default {${translations
+			.filter(([_, value]) => !noEmptyValues || (noEmptyValues && value))
+			.map(([key, value]) => `${key}: ${`\`${value.replace(/\s/g, ' ')}\``}`)}}`,
 		{parser: 'babel'}
 	)
 }
 
-const writeI18nFiles = (json: Translation[], useTypeScript: boolean, outputDirectory: string) => {
+const writeI18nFiles = (
+	json: Translation[],
+	useTypeScript: boolean,
+	noEmptyValues: boolean,
+	outputDirectory: string
+) => {
 	const translationsDictionary = buildTranslationDictionary(json)
 
 	for (const languageEntry of translationsDictionary) {
@@ -56,7 +63,7 @@ const writeI18nFiles = (json: Translation[], useTypeScript: boolean, outputDirec
 
 		fs.writeFileSync(
 			`${outputDirectory}${path.sep}${translationLanguage}.${extension}`,
-			translationsToJSFile(translations)
+			translationsToJSFile(translations, noEmptyValues)
 		)
 	}
 }
@@ -67,6 +74,7 @@ export const parseI18nFromConfluence = async (
 	username: string,
 	password: string,
 	useTypeScript: boolean,
+	noEmptyValues: boolean,
 	outputDirectiory: string
 ) => {
 	try {
@@ -78,7 +86,12 @@ export const parseI18nFromConfluence = async (
 
 		const jsonResponse: ConfluencePage = await restResponse.json()
 
-		writeI18nFiles(parseTableStringToJson(jsonResponse.body.storage.value), useTypeScript, outputDirectiory)
+		writeI18nFiles(
+			parseTableStringToJson(jsonResponse.body.storage.value),
+			useTypeScript,
+			noEmptyValues,
+			outputDirectiory
+		)
 	} catch (error) {
 		throw error
 	}

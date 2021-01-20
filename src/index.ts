@@ -11,6 +11,7 @@ const parseArgumentsIntoOptions = (rawArgs: string[]) => {
 			'--password': String,
 			'--typescript': Boolean,
 			'--outputdir': String,
+			'--noEmpty': Boolean,
 			'-d': '--domain',
 			'-i': '--pageid',
 			'-u': '--username',
@@ -29,6 +30,7 @@ const parseArgumentsIntoOptions = (rawArgs: string[]) => {
 		password: args['--password'],
 		useTypeScript: Boolean(args['--typescript']),
 		outputDir: args['--outputdir'] || '.',
+		noEmptyValues: Boolean(args['--noEmpty']),
 	}
 }
 
@@ -41,6 +43,7 @@ export const cli = (args: string[]) => {
 		options.username,
 		options.password,
 		options.useTypeScript,
+		options.noEmptyValues,
 		options.outputDir
 	)
 		.then(() => console.log('Successfully written i18n files'))
